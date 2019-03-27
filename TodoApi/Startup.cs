@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using TodoApi.Models;
+using TodoApi.Contexts;
 
 namespace TodoApi
 {
@@ -20,8 +20,12 @@ namespace TodoApi
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddDbContext<TodoContext>(options => options.UseInMemoryDatabase("TodoList"));
-			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+			services
+				.AddDbContext<TodoContext>(option => option.UseInMemoryDatabase("TodoList"));
+
+			services
+				.AddMvc()
+				.SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
